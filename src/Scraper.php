@@ -17,7 +17,7 @@ class Scraper extends AbstractScraper implements ScraperInterface
     /**
      * @var string[]
      */
-    protected $removables = array('.td-a-rec');
+    protected $removables = array('.td-a-rec', '.addtoany_share_save_container');
 
     /**
      * Returns the contents of an article.
@@ -29,11 +29,11 @@ class Scraper extends AbstractScraper implements ScraperInterface
     {
         $this->prepare((string) $link);
 
-        $title = $this->title('.td-post-title > h1');
+        $title = $this->title('.tdb-title-text');
 
         $this->remove((array) $this->removables);
 
-        $body = $this->body('.has-content-area');
+        $body = $this->body('.tdb_single_content > .tdb-block-inner.td-fix-index');
 
         $html = $this->html($body);
 
